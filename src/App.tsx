@@ -1,25 +1,38 @@
+import ButtonDemo from 'components/ButtonDemo/ButtonDemo';
+import CenterDemo from 'components/Center/CenterDemo';
+import RequiredAuth from 'hocs/RequiredAuth';
+import Layout from 'layout/Layout';
+import Home from 'pages/Home/Home';
+import Login from 'pages/Login/Login';
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import { PersistGate } from 'zustand-persist';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PersistGate>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route element={<Layout />}>
+          <Route
+            path="/"
+            element={
+              <RequiredAuth>
+                <Home />
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: '1rem' }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
+          />
+        </Route>
+      </Routes>
+    </PersistGate>
   );
 }
 
