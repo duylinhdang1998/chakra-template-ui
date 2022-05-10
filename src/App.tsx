@@ -1,5 +1,3 @@
-import ButtonDemo from 'components/ButtonDemo/ButtonDemo';
-import CenterDemo from 'components/Center/CenterDemo';
 import RequiredAuth from 'hocs/RequiredAuth';
 import Layout from 'layout/Layout';
 import Home from 'pages/Home/Home';
@@ -14,14 +12,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route element={<Layout />}>
-          <Route
-            path="/"
-            element={
-              <RequiredAuth>
-                <Home />
-              </RequiredAuth>
-            }
-          />
+          <Route path="/" element={<Home />} />
           <Route
             path="*"
             element={
